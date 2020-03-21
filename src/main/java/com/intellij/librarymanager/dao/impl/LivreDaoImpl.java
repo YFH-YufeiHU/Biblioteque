@@ -29,6 +29,7 @@ public class LivreDaoImpl implements LivreDao{
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM Livre;";
 	private static final String UPDATE_QUERY = "UPDATE Livre SET titre=?, auteur=?, isbn=? WHERE id=?;";
 	private static final String DELETE_QUERY = "DELETE FROM Livre WHERE id=?;";
+	private static final String COUNT_QUERY = "SELECT COUNT(id) AS count FROM livre;";
 	
 	@Override
 	public Livre getById(int id) throws DaoException{
@@ -117,17 +118,17 @@ public class LivreDaoImpl implements LivreDao{
 	public List<Livre> getList() throws DaoException {
 		List<Livre> livres = new ArrayList<>();
 		
-		try (Connection connection = ConnectionManager.getConnection();
-			 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_QUERY);
-			 ResultSet res = preparedStatement.executeQuery();
-				){
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_QUERY);
+			ResultSet res = preparedStatement.executeQuery();
 			while(res.next()) {
 				Livre f = new Livre(res.getInt("id"), res.getString("titre"), res.getString("realisateur"), res.getString("isbn"));
 				livres.add(f);
 			}
 			System.out.println("GET: " + livres);
 		} catch (SQLException e) {
-			throw new DaoException("Probl�me lors de la r�cup�ration de la liste des films", e);
+			throw new DaoException("Probleme lors de la recuperation de la liste des livres", e);
 		}
 		return livres;
 	}
@@ -189,10 +190,41 @@ public class LivreDaoImpl implements LivreDao{
 			}
 		}
 	}
-	
+
 	@Override
 	public int count() throws DaoException{
-		return 0;
+		ResultSet res = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int resultat = -1;
+		try {
+			connection = ConnectionManager.getConnection();
+			preparedStatement = connection.prepareStatement(COUNT_QUERY);
+			res = preparedStatement.executeQuery();
+			if(res.next()) {
+				resultat = res.getInt("count");
+			}
+			System.out.println("Compter le nombre des livres");
+		} catch (SQLException e) {
+			throw new DaoException("Probleme lors du compte des livres", e);
+		} finally {
+			try {
+				res.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return resultat;
 	}
 	
 }
