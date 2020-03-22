@@ -13,21 +13,27 @@ public class Emprunt {
     private LocalDate dateRetour;
 
     public Emprunt(){}
+
     public Emprunt(Integer idMembre, Integer idLivre,
-                    LocalDate dateEmprunt, LocalDate dateRetour)
+                    LocalDate dateEmprunt)
     {
-        this();
         this.idMembre = idMembre;
         this.idLivre = idLivre;
         this.dateEmprunt = dateEmprunt;
-        this.dateRetour = dateRetour;
+    }
+
+    public Emprunt( Integer id, Integer idMembre, Integer idLivre,
+                    LocalDate dateEmprunt)
+    {
+        this(idMembre, idLivre, dateEmprunt);
+        this.id = id;
     }
 
     public Emprunt( Integer id, Integer idMembre, Integer idLivre,
                    LocalDate dateEmprunt, LocalDate dateRetour)
     {
-        this(idMembre, idLivre, dateEmprunt, dateRetour);
-        this.id = id;
+        this(id, idMembre, idLivre, dateEmprunt);
+        this.dateRetour = dateRetour;
     }
 
     public Integer getId(){return id;}
@@ -61,10 +67,10 @@ public class Emprunt {
     {
         return getClass().getSimpleName()+"{"
                 +"id: "+id+","
-                +"Membre: ["+membre.toString()+"],"
-                +"Livre: ["+livre.toString()+"],"
+                +"Membre: ["+membre+"],"
+                +"Livre: ["+livre+"],"
                 +"idMembre: " +idMembre+","
-                +"idLibre: "+idLivre+","
+                +"idLivre: "+idLivre+","
                 +"dateEmprunt: "+dateEmprunt+","
                 +"dateRetour: "+dateRetour+"}";
     }

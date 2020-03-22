@@ -1,13 +1,10 @@
 package com.intellij.librarymanager.service.impl;
 
-import com.intellij.librarymanager.dao.LivreDao;
 import com.intellij.librarymanager.dao.MembreDao;
-import com.intellij.librarymanager.dao.impl.LivreDaoImpl;
 import com.intellij.librarymanager.dao.impl.MembreDaoImpl;
 import com.intellij.librarymanager.exception.DaoException;
 import com.intellij.librarymanager.exception.ServiceException;
 import com.intellij.librarymanager.model.Abonnement;
-import com.intellij.librarymanager.model.Livre;
 import com.intellij.librarymanager.model.Membre;
 import com.intellij.librarymanager.service.EmpruntService;
 import com.intellij.librarymanager.service.MembreService;
@@ -15,9 +12,9 @@ import com.intellij.librarymanager.service.MembreService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembreSviceImpl implements MembreService {
-    private static MembreSviceImpl instance = new MembreSviceImpl();
-    private MembreSviceImpl(){}
+public class MembreServiceImpl implements MembreService {
+    private static MembreServiceImpl instance = new MembreServiceImpl();
+    private MembreServiceImpl(){}
     public static MembreService getInstance(){
         return instance;
     }
@@ -40,13 +37,15 @@ public class MembreSviceImpl implements MembreService {
         List<Membre> membres = new ArrayList<>();
         EmpruntService empruntService = EmpruntServiceImpl.getInstance();
         try {
-            for(int id=0;id<membreDao.getList().size();id++)
+            int Size = membreDao.getList().size();
+            for(int id=1;id<=Size;id++)
             {
                 if(empruntService.isEmpruntPossible(membreDao.getById(id))==true)
                 {
                     membres.add(membreDao.getById(id));
                 }
             }
+            System.out.println("Liste des membres Possible"+membres);
         }catch (DaoException e1){
             System.out.println(e1.getMessage());
         }

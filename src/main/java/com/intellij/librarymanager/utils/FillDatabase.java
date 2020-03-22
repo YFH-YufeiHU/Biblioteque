@@ -30,7 +30,7 @@ public class FillDatabase {
         List<String> createTablesQueries = new ArrayList<>();
         createTablesQueries.add("CREATE TABLE IF NOT EXISTS livre(id INT primary key auto_increment, titre VARCHAR(100), auteur VARCHAR(100), isbn VARCHAR(20))");
         createTablesQueries.add("CREATE TABLE IF NOT EXISTS membre(id INT primary key auto_increment, nom VARCHAR(100), prenom VARCHAR(100), adresse TEXT, email VARCHAR(100), telephone VARCHAR(30), abonnement ENUM('BASIC', 'PREMIUM', 'VIP') DEFAULT 'BASIC')");
-        createTablesQueries.add("CREATE TABLE IF NOT EXISTS emprunt(id INT primary key auto_increment, idMembre INT, idLivre INT, dateEmprunt DATETIME, dateRetour DATETIME)");
+        createTablesQueries.add("CREATE TABLE IF NOT EXISTS emprunt(id INT primary key auto_increment, idMembre INT, idLivre INT, dateEmprunt DATE, dateRetour DATE)");
 
         try {
             connection.setAutoCommit(false);
