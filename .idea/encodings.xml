@@ -3,5 +3,17 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/classes/dashboard.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/emprunt_list.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/emprunt_add.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/emprunt_return.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/footer.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/livre_add.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/livre_delete.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/livre_details.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/livre_list.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/membre_delete.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/membre_details.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/membre_list.jsp" charset="GBK" />
   </component>
 </project>

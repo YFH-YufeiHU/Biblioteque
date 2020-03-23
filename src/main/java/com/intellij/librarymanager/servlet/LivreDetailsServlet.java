@@ -24,17 +24,17 @@ public class LivreDetailsServlet extends HttpServlet {
         LivreService livreService = LivreServiceImpl.getInstance();
         EmpruntService empruntService = EmpruntServiceImpl.getInstance();
         Livre livre = new Livre();
-        Emprunt emprunt  = new Emprunt();
+        List<Emprunt> emprunts = new ArrayList<>();
         try{
             String id = request.getParameter("id");
             int ID = Integer.parseInt(id);
             livre = livreService.getById(ID);
-            emprunt = empruntService.getById(ID);
+            emprunts = empruntService.getListCurrentByLivre(ID);
         }catch (ServiceException e1){
             e1.printStackTrace();
         }
         request.setAttribute("livre",livre);
-        request.setAttribute("emprunt",emprunt);
+        request.setAttribute("emprunts",emprunts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/livre_details.jsp");
         dispatcher.forward(request, response);
     }
