@@ -142,13 +142,13 @@ public class EmpruntServiceImpl implements EmpruntService {
             switch (membre.getAbonnement())
             {
                 case BASIC:numbersOfEmprunt=2;
-                        if(numbers==numbersOfEmprunt)
+                        if(numbers>=numbersOfEmprunt)
                         { System.out.println("L'utilisateur ne peut pas emprunter des livres");return false;}break;
                 case PREMIUM:numbersOfEmprunt=5;
-                        if(numbers==numbersOfEmprunt)
+                        if(numbers>=numbersOfEmprunt)
                         {System.out.println("L'utilisateur ne peut pas emprunter des livres");return false;}break;
                 case VIP:numbersOfEmprunt=20;
-                        if(numbers==numbersOfEmprunt)
+                        if(numbers>=numbersOfEmprunt)
                         {System.out.println("L'utilisateur ne peut pas emprunter des livres");return false;}break;
                 default:break;
             }

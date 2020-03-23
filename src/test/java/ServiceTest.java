@@ -16,25 +16,8 @@ import java.util.List;
 
 public class ServiceTest {
     public static void main(String[] args) {
-        /**test for MembreService**/
-        try{
-            MembreService membreService = MembreServiceImpl.getInstance();
-            membreService.getList();
-            membreService.getListMembreEmpruntPossible();
-            membreService.getById(12);
-            int number = membreService.count();
-            System.out.println(number);
-            membreService.delete(11);
-            membreService.create("aaa","bbb","ccc","ddd","123456");
-            membreService.create(null,"bbb","ccc","ddd","123456");
-            Membre membre = new Membre(7,"bbb","bbb","ccc","ddd","123456", Abonnement.VIP);
-            membreService.update(membre);
-            membreService.getList();
-        }catch (ServiceException e1){
-            System.out.println(e1.getMessage());
-        }
-
-        /**test for MembreService**/
+        /*When you execute the file, you shold execute FillDatebase firstly.*/
+        /**test for EmpruntService**/
         try {
             EmpruntService empruntService = EmpruntServiceImpl.getInstance();
             List<Emprunt>emprunts = new ArrayList<>();
@@ -50,6 +33,25 @@ public class ServiceTest {
             empruntService.getById(2);
             empruntService.returnBook(2);
             empruntService.create(2,9, LocalDate.of(2020,03,22));
+            empruntService.getList();
+        }catch (ServiceException e1){
+            System.out.println(e1.getMessage());
+        }
+
+        /**test for MembreService**/
+        try{
+            MembreService membreService = MembreServiceImpl.getInstance();
+            membreService.getList();
+            membreService.getListMembreEmpruntPossible();
+            membreService.getById(12);
+            int number = membreService.count();
+            System.out.println(number);
+            membreService.delete(11);
+            membreService.create("aaa","bbb","ccc","ddd","123456");
+            //.create(null,"bbb","ccc","ddd","123456");
+            Membre membre = new Membre(7,"bbb","bbb","ccc","ddd","123456", Abonnement.VIP);
+            membreService.update(membre);
+            membreService.getList();
         }catch (ServiceException e1){
             System.out.println(e1.getMessage());
         }
@@ -75,6 +77,8 @@ public class ServiceTest {
         }catch (ServiceException e1){
             System.out.println(e1.getMessage());
         }
+
+
 
     }
 }

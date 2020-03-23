@@ -40,9 +40,11 @@ public class MembreServiceImpl implements MembreService {
             int Size = membreDao.getList().size();
             for(int id=1;id<=Size;id++)
             {
-                if(empruntService.isEmpruntPossible(membreDao.getById(id))==true)
-                {
-                    membres.add(membreDao.getById(id));
+                if(membreDao.getById(id)!=null){
+                    if(empruntService.isEmpruntPossible(membreDao.getById(id))==true)
+                    {
+                        membres.add(membreDao.getById(id));
+                    }
                 }
             }
             System.out.println("Liste des membres Possible"+membres);
