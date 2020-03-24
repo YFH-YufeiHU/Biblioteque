@@ -26,10 +26,11 @@ public class LivreDetailsServlet extends HttpServlet {
         Livre livre = new Livre();
         List<Emprunt> emprunts = new ArrayList<>();
         try{
-            String id = request.getParameter("id");
-            int ID = Integer.parseInt(id);
-            livre = livreService.getById(ID);
-            emprunts = empruntService.getListCurrentByLivre(ID);
+            String ID = request.getParameter("id");
+            int id = Integer.parseInt(ID);
+
+            livre = livreService.getById(id);
+            emprunts = empruntService.getListCurrentByLivre(id);
         }catch (ServiceException e1){
             e1.printStackTrace();
         }
@@ -46,7 +47,9 @@ public class LivreDetailsServlet extends HttpServlet {
             String titre = request.getParameter("titre");
             String auteur = request.getParameter("auteur");
             String isbn = request.getParameter("isbn");
-            Livre livre = new Livre(titre,auteur,isbn);
+            String id = request.getParameter("id");
+            int ID = Integer.parseInt(id);
+            Livre livre = new Livre(ID,titre,auteur,isbn);
             livreService.update(livre);
         }catch (ServiceException e1){
             e1.printStackTrace();

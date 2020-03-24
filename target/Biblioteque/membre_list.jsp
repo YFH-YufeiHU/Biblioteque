@@ -27,11 +27,11 @@
             <thead>
               <tr>
                 <th>Nom</th>
-                <th>Pr�nom</th>
+                <th>Prénom</th>
                 <th class="hide-on-small-only">Adresse</th>
                 <th class="hide-on-small-only">E-mail</th>
-                <th class="hide-on-small-only">T�l�phone</th>
-                <th>D�tails</th>
+                <th class="hide-on-small-only">Téléphone</th>
+                <th>Détails</th>
               </tr>
             <tbody>
             </thead>
@@ -53,12 +53,11 @@
                 <td><%=membres.get(i).getAdresse() %></td>
                 <td><%=membres.get(i).getEmail() %></td>
                 <td><%=membres.get(i).getTelephone() %></td>
-                <td class="center"><a href="membre_details?id=idDuMembre"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
+                <td class="center"><a href="membre_details?id=<%=membres.get(i).getId()%>">detail</a></td>
               </tr>
               <%}
               %>
 
-              <!-- TODO : parcourir la liste des membres et les afficher selon la structure d'exemple ci-dessus -->
             </tbody>
           </table>
         </div>

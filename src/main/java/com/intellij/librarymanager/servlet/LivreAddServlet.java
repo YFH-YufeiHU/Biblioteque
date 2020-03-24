@@ -42,7 +42,17 @@ public class LivreAddServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException{
-        doGet(request,response);
-        response.sendRedirect("livre_list.jsp");
+       // doGet(request,response);
+        LivreService livreService = LivreServiceImpl.getInstance();
+        try{
+            String titre = request.getParameter("titre");
+            String auteur = request.getParameter("auteur");
+            String isbn = request.getParameter("isbn");
+            LocalDate localDate = LocalDate.now();
+            livreService.create(titre,auteur,isbn);
+        }catch (ServiceException e1){
+            e1.printStackTrace();
+        }
+        response.sendRedirect("livre_list");
     }
 }

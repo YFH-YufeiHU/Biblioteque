@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -225,7 +224,6 @@ public class MembreDaoImpl implements MembreDao{
 			if(res.next()) {
 				resultat = res.getInt("count");
 			}
-			System.out.println("Compter le nombre des membres");
 		} catch (SQLException e) {
 			throw new DaoException("Probleme lors du compte des membres", e);
 		} finally {

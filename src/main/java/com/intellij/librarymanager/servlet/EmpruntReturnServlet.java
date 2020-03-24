@@ -28,7 +28,7 @@ public class EmpruntReturnServlet extends HttpServlet {
         }catch (ServiceException e1){
             e1.printStackTrace();
         }
-        request.setAttribute("membres", emprunts);
+        request.setAttribute("emprunts", emprunts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/emprunt_return.jsp");
         dispatcher.forward(request, response);
     }

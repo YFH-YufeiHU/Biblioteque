@@ -41,8 +41,11 @@ public class LivreServiceImpl implements LivreService {
             int Size = livreDao.getList().size();
             for (int id=1;id<=Size;id++)
             {
-                if(empruntService.isLivreDispo(id)==true)
-                    livres.add(livreDao.getById(id));
+                if(livreDao.getById(id)!=null)
+                {
+                    if(empruntService.isLivreDispo(id))
+                        livres.add(livreDao.getById(id));
+                }
             }
             System.out.println("Liste des livres disponibles"+livres);
         }catch (DaoException e1){
@@ -70,11 +73,8 @@ public class LivreServiceImpl implements LivreService {
             if(titre==null)
                 throw new ServiceException("Le titre est vide!");
             i = livreDao.create(titre,auteur,isbn);
-        }catch (DaoException e1){
+        }catch (DaoException | ServiceException e1){
             System.out.println(e1.getMessage());
-        }
-        catch (ServiceException e2){
-            System.out.println(e2.getMessage());
         }
         return i;
     }
@@ -85,12 +85,9 @@ public class LivreServiceImpl implements LivreService {
             if(livre.getTitre()==null)
                 throw new ServiceException("le titre est vide!");
             livreDao.update(livre);
-        }catch (DaoException e1){
+        }catch (DaoException | ServiceException e1){
             System.out.println(e1.getMessage());
-        }catch (ServiceException e2){
-            System.out.println(e2.getMessage());
         }
-        return;
     }
     @Override
     public void delete(int id) throws ServiceException{
@@ -103,7 +100,6 @@ public class LivreServiceImpl implements LivreService {
         }catch (NumberFormatException e2){
             throw new ServiceException("Erreur lors du id"+id,e2);
         }
-        return;
     }
     @Override
     public int count() throws ServiceException{

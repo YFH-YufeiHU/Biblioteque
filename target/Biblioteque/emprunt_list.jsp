@@ -55,7 +55,7 @@
                         <% if (emprunts1.get(i).getDateRetour()!=null) { %>
                             <td><%=emprunts1.get(i).getDateRetour() %></td>
                         <% } else { %>
-                            <td><a href="emprunt_add"><ion-icon class="menu-item pink-item" name="log-out"></ion-icon>Emprunter un livre</a></td>
+                            <td><a href="emprunt_return?id=+<%=emprunts1.get(i).getId()%>">retourner</a></td>
                         <% } %>
                     </tr>
                     <%}

@@ -1,3 +1,5 @@
+<%@ page import="com.intellij.librarymanager.model.*" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -23,20 +25,21 @@
       <div class="container">
       <h5>D?tails du livre n?${livre.id}</h5>
         <div class="row">
-	      <form action="/LibraryManager/livre_details?id=idDuLivre" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+            <% Livre livre = (Livre) request.getAttribute("livre");%>
+	      <form action="/Biblioteque_war_exploded/livre_details?id=<%=livre.getId()%>" method="post" class="col s12">
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="titre" type="text" value="titreDuLivre" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
+	            <input id="titre" type="text" value="<%=livre.getTitre()%>" name="titre">
 	            <label for="titre">Titre</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="auteur" type="text" value="auteurDuLivre" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
+	            <input id="auteur" type="text" value="<%=livre.getAuteur()%>" name="auteur">
 	            <label for="auteur">Auteur</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="isbn" type="text" value="isbnDuLivre" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
+	            <input id="isbn" type="text" value="<%=livre.getIsbn()%>" name="isbn">
 	            <label for="isbn">ISBN 13</label>
 	          </div>
 	        </div>
@@ -46,8 +49,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/livre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="/Biblioteque_war_exploded/livre_delete" method="get" class="col s12">
+	        <input type="hidden" value="<%=livre.getId()%>" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le livre
 	            <i class="material-icons right">delete</i>
@@ -71,9 +74,25 @@
                   <td>Pr?nom et nom du membre emprunteur</td>
                   <td>Date de l'emprunt</td>
                   <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
+                    <a href="emprunt_return"><ion-icon class="table-item" name="log-in"></a>
                   </td>
                 </tr>
+
+                <% List<Emprunt> emprunts1 = (List) request.getAttribute("emprunts");
+                    for(int i=0; i<emprunts1.size(); i++)
+                    {%>
+                <tr>
+                    <td><%=emprunts1.get(i).getMembre().getNom()+" "+emprunts1.get(i).getMembre().getPrenom() %></td>
+                    <td><%=emprunts1.get(i).getDateEmprunt() %></td>
+
+                    <% if (emprunts1.get(i).getDateRetour()!=null) { %>
+                    <td><%=emprunts1.get(i).getDateRetour() %></td>
+                    <% } else { %>
+                    <td><a href="emprunt_return?id=<%=emprunts1.get(i).getId()%>">retourner</a></td>
+                    <% } %>
+                </tr>
+                <%}
+                %>
 
 				<!-- TODO : parcourir la liste des emprunts en cours pour ce livre et les afficher selon la structure d'exemple ci-dessus -->
               </tbody>

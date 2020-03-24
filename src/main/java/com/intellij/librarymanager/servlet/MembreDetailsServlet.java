@@ -55,8 +55,9 @@ public class MembreDetailsServlet extends HttpServlet {
             String telephone = request.getParameter("telephone");
             String abonnement = request.getParameter("abonnement");
             Abonnement abonnement1 = Abonnement.valueOf(abonnement);
-
-            Membre membre = new Membre(nom,prenom,adresse,email,telephone,abonnement1);
+            String id = request.getParameter("id");
+            int ID = Integer.parseInt(id);
+            Membre membre = new Membre(ID,nom,prenom,adresse,email,telephone,abonnement1);
             membreService.update(membre);
         }catch (ServiceException e1){
             e1.printStackTrace();

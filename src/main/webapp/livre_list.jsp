@@ -47,11 +47,10 @@
                         <td><%=livres.get(i).getTitre() %></td>
                         <td><%=livres.get(i).getAuteur() %></td>
                         <td><%=livres.get(i).getIsbn() %></td>
-                        <td class="center"><a href="livre_details?id=idDuLivre">livre details</a></td>
+                        <td class="center"><a href="livre_details?id=<%=livres.get(i).getId()%>">detail</a></td>
                     </tr>
                     <%}
                     %>
-                    <!-- TODO : parcourir la liste des livres et les afficher selon la structure d'exemple ci-dessus -->
                 </tbody>
             </table>
           </div>
